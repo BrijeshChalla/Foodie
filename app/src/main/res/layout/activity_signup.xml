@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <ImageView
+        android:id="@+id/logoSignup"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/txtFoodieSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foodie"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/logoSignup"
+        app:layout_constraintStart_toStartOf="@id/logoSignup"
+        app:layout_constraintTop_toBottomOf="@+id/logoSignup" />
+
+    <TextView
+        android:id="@+id/txtSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Sign Up Here!"
+        android:textColor="@color/textColor"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/txtFoodieSignup"
+        app:layout_constraintStart_toStartOf="@id/txtFoodieSignup"
+        app:layout_constraintTop_toBottomOf="@+id/txtFoodieSignup" />
+
+    <EditText
+        android:id="@+id/etNameSignup"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edittextshape"
+        android:drawableLeft="@drawable/user"
+        android:drawablePadding="15dp"
+        android:elevation="5dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/txtSignup"
+        app:layout_constraintStart_toStartOf="@id/txtSignup"
+        app:layout_constraintTop_toBottomOf="@+id/txtSignup" />
+
+    <EditText
+        android:id="@+id/etEmailSignup"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittextshape"
+        android:drawableLeft="@drawable/mail"
+        android:drawablePadding="15dp"
+        android:elevation="5dp"
+        android:ems="10"
+        android:hint="Email or Phone Number"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/etNameSignup"
+        app:layout_constraintStart_toStartOf="@id/etNameSignup"
+        app:layout_constraintTop_toBottomOf="@+id/etNameSignup" />
+
+    <EditText
+        android:id="@+id/etPasswordSignup"
+        android:layout_width="325dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/edittextshape"
+        android:drawableLeft="@drawable/lock"
+        android:drawablePadding="15dp"
+        android:elevation="5dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/etEmailSignup"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/etEmailSignup"
+        app:layout_constraintTop_toBottomOf="@+id/etEmailSignup" />
+
+    <View
+        android:id="@+id/viewLine"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@id/etPasswordSignup"
+        app:layout_constraintStart_toStartOf="@id/etPasswordSignup"
+        app:layout_constraintTop_toBottomOf="@id/etPasswordSignup" />
+
+    <TextView
+        android:id="@+id/txtOr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rectangle"
+        android:drawableTint="@color/white"
+        android:paddingHorizontal="5dp"
+        android:text="OR"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/viewLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewLine" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnFacebookSignup"
+        android:layout_width="152dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/whitebutton"
+        android:drawableLeft="@drawable/facebook"
+        android:paddingLeft="15dp"
+        android:text="Facebook"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/btnGoogleSignup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtOr" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnGoogleSignup"
+        android:layout_width="152dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/whitebutton"
+        android:drawableLeft="@drawable/google"
+        android:paddingLeft="15dp"
+        android:text="Google"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnFacebookSignup"
+        app:layout_constraintTop_toBottomOf="@+id/txtOr" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSignup"
+        android:layout_width="150dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/redbuttongradient"
+        android:text="SignUp"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnGoogleSignup"
+        app:layout_constraintStart_toStartOf="@+id/btnFacebookSignup"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignup" />
+
+    <TextView
+        android:id="@+id/btnAlreadyHave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:elevation="5dp"
+        android:textColor="@color/textColor"
+        android:text="Already Have an Account?"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignup"
+        app:layout_constraintStart_toStartOf="@+id/btnSignup"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignup" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
