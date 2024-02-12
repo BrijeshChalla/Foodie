@@ -3,11 +3,11 @@ package com.learnandroid.foodie
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import com.learnandroid.foodie.databinding.ActivityChooeseLocationBinding
+import com.learnandroid.foodie.databinding.ActivityChooseLocationBinding
 
-class ChooeseLocationActivity : AppCompatActivity() {
-    private val binding: ActivityChooeseLocationBinding by lazy {
-        ActivityChooeseLocationBinding.inflate(layoutInflater)
+class ChooseLocationActivity : AppCompatActivity() {
+    private val binding: ActivityChooseLocationBinding by lazy {
+        ActivityChooseLocationBinding.inflate(layoutInflater)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
