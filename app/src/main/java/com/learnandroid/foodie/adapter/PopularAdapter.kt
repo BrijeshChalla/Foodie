@@ -4,30 +4,37 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.learnandroid.foodie.databinding.PopularItemBinding
+import com.learnandroid.foodie.models.Product
 
-class PopularAdapter (private val items:List<String>,private val price:List<String>, private val image:List<Int>) : RecyclerView.Adapter<PopularAdapter.PopularViewHolder>() {
+class PopularAdapter(private val productList: MutableList<Product>) :
+    RecyclerView.Adapter<PopularAdapter.PopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-        return PopularViewHolder(PopularItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return PopularViewHolder(
+            PopularItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
-        val item = items[position]
-        val images = image[position]
-        val price = price[position]
-        holder.bind(item, price, images)
+        val item = productList[position]
+        holder.bind(item)
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return productList.size
     }
 
-    class PopularViewHolder (private val binding: PopularItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class PopularViewHolder(private val binding: PopularItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         private val imagesView = binding.imgFoodIcon
-        fun bind(item: String,price: String, images: Int) {
-            binding.txtFoodName.text = item
-            binding.pricePopular.text =  price
-            imagesView.setImageResource(images)
+        fun bind(item: Product) {
+            binding.txtFoodName.text = item.productName
+            binding.pricePopular.text = item.price
+            imagesView.setImageResource(item.imageUrl)
         }
 
     }

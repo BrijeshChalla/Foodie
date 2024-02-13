@@ -13,6 +13,7 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.learnandroid.foodie.R
 import com.learnandroid.foodie.adapter.PopularAdapter
 import com.learnandroid.foodie.databinding.FragmentHomeBinding
+import com.learnandroid.foodie.models.Product
 
 
 class HomeFragment : Fragment() {
@@ -57,7 +58,14 @@ class HomeFragment : Fragment() {
         val price = listOf("₹200", "₹150", "₹300", "₹500")
         val popularFoodImages =
             listOf(R.drawable.menu1, R.drawable.menu2, R.drawable.menu3, R.drawable.menu4)
-        val adapter = PopularAdapter(item, price, popularFoodImages)
+        var productList = mutableListOf<Product>()
+
+        item.forEachIndexed { index, name ->
+            productList.add(
+                Product(name, price.get(index), popularFoodImages.get(index))
+            )
+        }
+        val adapter = PopularAdapter(productList)
         binding.popularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.popularRecyclerView.adapter = adapter
     }

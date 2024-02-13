@@ -17,7 +17,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="7dp">
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imgFoodIcon"
@@ -55,7 +55,7 @@
             android:id="@+id/btnAddToCartPopular"
             android:layout_width="85dp"
             android:layout_height="20dp"
-            android:background="@drawable/addtocartshape"
+            android:background="@drawable/add_to_cart_shape"
             android:gravity="center"
             android:text="Add To Cart"
             android:textColor="@color/white"
