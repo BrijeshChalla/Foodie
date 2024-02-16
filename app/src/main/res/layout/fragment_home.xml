@@ -35,7 +35,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViewMore" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewMenu" />
 
     <TextView
         android:id="@+id/txtPopular"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <TextView
-        android:id="@+id/txtViewMore"
+        android:id="@+id/txtViewMenu"
         android:layout_width="80dp"
         android:layout_height="25dp"
         android:layout_marginTop="16dp"
@@ -58,7 +58,7 @@
         android:background="@drawable/textviewshape"
         android:elevation="5dp"
         android:gravity="center"
-        android:text="View More"
+        android:text="View Menu"
         android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
