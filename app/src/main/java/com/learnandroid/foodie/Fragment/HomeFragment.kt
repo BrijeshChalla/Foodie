@@ -60,10 +60,10 @@ class HomeFragment : Fragment() {
 
             }
         })
-        val item = listOf("Burger", "Momos", "Manchurian", "Pizza")
-        val price = listOf("₹200", "₹150", "₹300", "₹500")
+        val item = listOf("Tomato Pasta","Burger", "Momos", "Manchurian", "Pizza")
+        val price = listOf("₹250","₹200", "₹150", "₹300", "₹500")
         val popularFoodImages =
-            listOf(R.drawable.menu1, R.drawable.menu2, R.drawable.menu3, R.drawable.menu4)
+            listOf(R.drawable.menu5,R.drawable.menu1, R.drawable.menu2, R.drawable.menu3, R.drawable.menu4)
         var productList = mutableListOf<Product>()
 
         item.forEachIndexed { index, name ->
@@ -71,7 +71,7 @@ class HomeFragment : Fragment() {
                 Product(name, price.get(index), popularFoodImages.get(index))
             )
         }
-        val adapter = PopularAdapter(productList)
+        val adapter = PopularAdapter(productList,requireContext())
         binding.popularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.popularRecyclerView.adapter = adapter
     }

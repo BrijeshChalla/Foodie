@@ -1,12 +1,15 @@
 package com.learnandroid.foodie.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.learnandroid.foodie.DetailsActivity
 import com.learnandroid.foodie.databinding.PopularItemBinding
 import com.learnandroid.foodie.models.Product
 
-class PopularAdapter(private val productList: MutableList<Product>) :
+class PopularAdapter(private val productList: MutableList<Product>, private val requireContext : Context) :
     RecyclerView.Adapter<PopularAdapter.PopularViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
@@ -22,6 +25,13 @@ class PopularAdapter(private val productList: MutableList<Product>) :
     override fun onBindViewHolder(holder: PopularViewHolder, position: Int) {
         val item = productList[position]
         holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(requireContext, DetailsActivity::class.java)
+            intent.putExtra("MenuItemName", item.productName)
+            intent.putExtra("MenuItemImage", item.imageUrl)
+            requireContext.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

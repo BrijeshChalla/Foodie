@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".DetailsActivity">
+
+    <ImageView
+        android:id="@+id/btnBackDetails"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFoodNameDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="FoodName"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackDetails" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/imgCardViewDetails"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFoodNameDetails">
+
+        <ImageView
+            android:id="@+id/img_food_details"
+            android:layout_width="360dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/menu5" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txtAboutFoodDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="About Food"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgCardViewDetails" />
+
+    <TextView
+        android:id="@+id/txtFoodDetails"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="A Delicious pasta that's tossed in tomato cream sauce and finished with chopped fresh basil."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/txtAboutFoodDetails"
+        app:layout_constraintTop_toBottomOf="@+id/txtAboutFoodDetails" />
+
+    <TextView
+        android:id="@+id/txtIngredientsHeadDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Ingredients"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/txtFoodDetails"
+        app:layout_constraintTop_toBottomOf="@+id/txtFoodDetails" />
+
+    <TextView
+        android:id="@+id/txtIngredientsDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Fresh Tomato\nTomato Sauce\nFresh Basil"
+        app:layout_constraintStart_toStartOf="@+id/txtIngredientsHeadDetails"
+        app:layout_constraintTop_toBottomOf="@+id/txtIngredientsHeadDetails" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddToCartDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/add_to_cart_shape"
+        android:text="Add to Cart"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtIngredientsDetails" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,6 +12,13 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        //Remove below code this is for testing
+        binding.btnSignup.setOnClickListener {
+            val intent = Intent(this, ChooseLocationActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnAlreadyHave.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
