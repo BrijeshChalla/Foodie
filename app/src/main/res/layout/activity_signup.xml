@@ -51,7 +51,6 @@
         android:elevation="5dp"
         android:ems="10"
         android:hint="Name"
-        android:inputType="textEmailAddress"
         android:paddingLeft="15dp"
         app:layout_constraintEnd_toEndOf="@+id/txtSignup"
         app:layout_constraintStart_toStartOf="@id/txtSignup"

@@ -77,12 +77,25 @@
                     android:id="@+id/orderStatus"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="28dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="40dp"
                     app:cardBackgroundColor="#53C658"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReceivedHistory"
+                    android:layout_width="85dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/add_to_cart_shape"
+                    android:text="Received"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"
+                    android:textAllCaps="false"
+                    app:layout_constraintEnd_toEndOf="@+id/orderStatus"
+                    app:layout_constraintStart_toStartOf="@+id/orderStatus"
+                    app:layout_constraintTop_toBottomOf="@+id/orderStatus" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
