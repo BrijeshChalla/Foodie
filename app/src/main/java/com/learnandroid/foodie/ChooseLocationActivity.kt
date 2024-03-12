@@ -18,6 +18,7 @@ class ChooseLocationActivity : AppCompatActivity() {
         binding.txtDesignedByChoose.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val locationList = arrayOf("Gujarat", "Maharashtra", "Rajasthan", "Goa")

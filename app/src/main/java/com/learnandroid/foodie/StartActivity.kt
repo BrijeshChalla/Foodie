@@ -15,6 +15,7 @@ class StartActivity : AppCompatActivity() {
         binding.btnNextStart.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
