@@ -10,15 +10,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.interfaces.ItemClickListener
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.learnandroid.foodie.MenuBottomSheetFragment
 import com.learnandroid.foodie.R
+import com.learnandroid.foodie.adapter.MenuAdapter
 import com.learnandroid.foodie.adapter.PopularAdapter
 import com.learnandroid.foodie.databinding.FragmentHomeBinding
+import com.learnandroid.foodie.model.MenuItem
 import com.learnandroid.foodie.models.Product
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var database: FirebaseDatabase
+    private lateinit var menuItems: MutableList<MenuItem>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -32,9 +41,50 @@ class HomeFragment : Fragment() {
 
         binding.txtViewMenu.setOnClickListener {
             val bottomSheetDialog = MenuBottomSheetFragment()
-            bottomSheetDialog.show(parentFragmentManager,"Test")
+            bottomSheetDialog.show(parentFragmentManager, "Test")
         }
+
+        //retrieve and display popular menu items
+        retrieveAndDisplayPopularItems()
         return binding.root
+    }
+
+    private fun retrieveAndDisplayPopularItems() {
+        // get reference to the database
+        database = FirebaseDatabase.getInstance()
+        val foodRef : DatabaseReference = database.reference.child("menu")
+        menuItems = mutableListOf()
+
+        // retrieve menu items from the database
+        foodRef.addListenerForSingleValueEvent(object  : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (foodSnapshot in snapshot.children){
+                    val menuItem = foodSnapshot.getValue(MenuItem::class.java)
+                    menuItem?.let {menuItems.add(it)}
+                }
+                //display random popular item
+                randomPopularItems()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    private fun randomPopularItems() {
+        // create a shuffle list of menu items
+        val index = menuItems.indices.toList().shuffled()
+        val numItemToShow = 6
+        val subsetMenuItem = index.take(numItemToShow).map { menuItems[it] }
+
+        setPopularItemsAdapter(subsetMenuItem)
+    }
+
+    private fun setPopularItemsAdapter(subsetMenuItem: List<MenuItem>) {
+        val adapter = MenuAdapter(subsetMenuItem, requireContext())
+        binding.popularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.popularRecyclerView.adapter = adapter
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,22 +110,5 @@ class HomeFragment : Fragment() {
 
             }
         })
-        val item = listOf("Tomato Pasta","Burger", "Momos", "Manchurian", "Pizza")
-        val price = listOf("₹250","₹200", "₹150", "₹300", "₹500")
-        val popularFoodImages =
-            listOf(R.drawable.menu5,R.drawable.menu1, R.drawable.menu2, R.drawable.menu3, R.drawable.menu4)
-        var productList = mutableListOf<Product>()
-
-        item.forEachIndexed { index, name ->
-            productList.add(
-                Product(name, price.get(index), popularFoodImages.get(index))
-            )
-        }
-        val adapter = PopularAdapter(productList,requireContext())
-        binding.popularRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.popularRecyclerView.adapter = adapter
-    }
-
-    companion object {
     }
 }

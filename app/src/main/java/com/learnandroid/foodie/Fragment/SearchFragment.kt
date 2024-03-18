@@ -45,10 +45,10 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSearchBinding.inflate(inflater, container, false)
-        adapter = MenuAdapter(filteredMenuFoodName, filteredMenuItemPrice, filteredMenuImage, requireContext())
-        binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.searchRecyclerView.adapter = adapter
+//        binding = FragmentSearchBinding.inflate(inflater, container, false)
+//        adapter = MenuAdapter(filteredMenuFoodName, filteredMenuItemPrice, filteredMenuImage, requireContext())
+//        binding.searchRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//        binding.searchRecyclerView.adapter = adapter
 
         setUpSearchView()
         // show all menu items
