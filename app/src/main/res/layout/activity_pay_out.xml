@@ -65,7 +65,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Your Name"
                 android:inputType="text"
                 android:paddingStart="10dp"
                 android:textSize="14sp" />
@@ -99,7 +98,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Delivery Address"
                 android:inputType="textMultiLine"
                 android:paddingStart="10dp"
                 android:textSize="14sp" />
@@ -133,7 +131,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Your Phone Number"
                 android:inputType="phone"
                 android:paddingStart="10dp"
                 android:textSize="14sp" />
@@ -182,7 +179,7 @@
             android:padding="20dp">
 
             <TextView
-                android:id="@+id/txtTotalAmaount"
+                android:id="@+id/txtAmount"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -190,7 +187,7 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/txtPricePayOut"
+                android:id="@+id/txtTotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -199,7 +196,6 @@
                 android:gravity="end"
                 android:inputType="none"
                 android:paddingEnd="20dp"
-                android:text="₹ 250"
                 android:textColor="@color/textColor"
                 android:textSize="20sp" />
 

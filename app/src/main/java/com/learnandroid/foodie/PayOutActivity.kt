@@ -17,6 +17,7 @@ class PayOutActivity : AppCompatActivity() {
     private lateinit var name : String
     private lateinit var address : String
     private lateinit var phone : String
+    private lateinit var totalAmount : String
     private lateinit var foodItemName : ArrayList<String>
     private lateinit var foodItemPrice : ArrayList<String>
     private lateinit var foodItemInfo : ArrayList<String>
@@ -35,11 +36,43 @@ class PayOutActivity : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().getReference()
         // set user data
         setUserData()
+        // get user details from Firebase
+        val intent = intent
 
+        foodItemName = intent.getStringArrayListExtra("FoodItemName") as ArrayList<String>
+        foodItemPrice = intent.getStringArrayListExtra("FoodItemPrice") as ArrayList<String>
+        foodItemInfo = intent.getStringArrayListExtra("FoodItemInfo") as ArrayList<String>
+        foodItemImage = intent.getStringArrayListExtra("FoodItemImage") as ArrayList<String>
+        foodItemIngredient = intent.getStringArrayListExtra("FoodItemIngredient") as ArrayList<String>
+        foodItemQuantity = intent.getIntegerArrayListExtra("FoodItemQuantity") as ArrayList<Int>
+
+        totalAmount = calculateTotalAmount().toString() + "₹"
+        binding.txtTotalAmount.isEnabled = false
+        binding.txtTotalAmount.setText(totalAmount)
+        binding.btnBackPayout.setOnClickListener {
+            finish()
+        }
         binding.btnPlaceOrder.setOnClickListener {
             val bottomSheetDialog = CongratsBottomSheet()
             bottomSheetDialog.show(supportFragmentManager,"Test")
         }
+    }
+
+    private fun calculateTotalAmount(): Int {
+        var totalAmount = 0
+        for (i in 0 until foodItemPrice.size){
+            var price = foodItemPrice[i]
+            val lastChar = price.last()
+            val priceIntValue = if (lastChar == '₹'){
+                price.dropLast(1).toInt()
+            }else
+            {
+                price.toInt()
+            }
+            var quantity = foodItemQuantity[i]
+            totalAmount += priceIntValue * quantity
+        }
+        return totalAmount
     }
 
     private fun setUserData() {

@@ -42,7 +42,7 @@ class CartAdapter(
         // get updated quantity
         fun getUpdatedItemsQuantities(): MutableList<Int> {
             val itemQuantity = mutableListOf<Int>()
-            itemQuantity.addAll(itemQuantity)
+            itemQuantity.addAll(itemQuantities.toList())
             return itemQuantity
         }
         private var itemQuantities: IntArray = intArrayOf()
@@ -92,6 +92,7 @@ class CartAdapter(
         private fun decreaseQuantity(position: Int) {
             if (itemQuantities[position] > 1) {
                 itemQuantities[position]--
+                cartQuantity[position] = itemQuantities[position]
                 binding.txtQuantity.text = itemQuantities[position].toString()
             }
         }
@@ -99,6 +100,7 @@ class CartAdapter(
         private fun increaseQuantity(position: Int) {
             if (itemQuantities[position] < 10) {
                 itemQuantities[position]++
+                cartQuantity[position] = itemQuantities[position]
                 binding.txtQuantity.text = itemQuantities[position].toString()
             }
         }

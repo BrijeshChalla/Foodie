@@ -2,6 +2,7 @@ package com.learnandroid.foodie.Fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -99,7 +100,7 @@ class CartFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {
                 Toast.makeText(
-                    context,
+                    requireContext(),
                     "Order Processing Failed Please try Again ",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -129,6 +130,7 @@ class CartFragment : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (foodSnapshot in snapshot.children) {
                     // get the cartItems object from the child node
+                    Log.d("CartFrag","${foodSnapshot.value}")
                     val cartItems = foodSnapshot.getValue(CartItems::class.java)
 
                     // add cartItems details to the list

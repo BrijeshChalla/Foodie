@@ -44,7 +44,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Your Full Name"
                 android:inputType="text"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -112,7 +111,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:ems="10"
-                android:hint="Your Email"
                 android:inputType="textEmailAddress"
                 android:textSize="14sp" />
 
