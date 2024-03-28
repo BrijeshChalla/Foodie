@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtEditPayout"
+        android:id="@+id/txtEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edit"
@@ -36,7 +36,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtEditPayout">>
+        app:layout_constraintTop_toBottomOf="@id/txtEdit">>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="4dp"
     android:layout_marginBottom="10dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="2dp"
+    android:background="@color/white"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -34,34 +35,51 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
             android:text="Food Name"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/imgFoodIcon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/pricePopular"
-            android:layout_width="34dp"
-            android:layout_height="22dp"
-            android:layout_marginTop="5dp"
-            android:text="₹200"
+            android:id="@+id/txtQuantityRecent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:text="Quantity -"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/txtFoodName"
-            app:layout_constraintTop_toBottomOf="@+id/txtFoodName" />
+            app:layout_constraintTop_toBottomOf="@+id/txtFoodName"
+            app:layout_constraintBottom_toBottomOf="@+id/imgFoodIcon"
+            app:layout_constraintStart_toStartOf="@+id/txtFoodName"/>
 
         <TextView
-            android:id="@+id/btnAddToCartPopular"
-            android:layout_width="85dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/add_to_cart_shape"
-            android:gravity="center"
-            android:text="Add To Cart"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/pricePopular"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtFoodName" />
+            android:id="@+id/txtQuantityRecentBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textColor="@color/textColor"
+            android:layout_marginStart="6dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/txtQuantityRecent"
+            app:layout_constraintTop_toTopOf="@+id/txtQuantityRecent"
+            app:layout_constraintBottom_toBottomOf="@+id/txtQuantityRecent"/>
+
+        <TextView
+            android:id="@+id/priceRecentBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹200"
+            android:textSize="16sp"
+            android:layout_marginEnd="20dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/txtFoodName"
+            app:layout_constraintBottom_toBottomOf="@+id/txtQuantityRecent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
