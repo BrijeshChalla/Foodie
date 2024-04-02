@@ -28,6 +28,7 @@ class PayOutActivity : AppCompatActivity() {
     private lateinit var foodItemQuantity: ArrayList<Int>
     private lateinit var databaseReference: DatabaseReference
     private lateinit var userId: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPayOutBinding.inflate(layoutInflater)
@@ -35,33 +36,36 @@ class PayOutActivity : AppCompatActivity() {
 
         //initialize firebase and user details
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference()
+        databaseReference = FirebaseDatabase.getInstance().reference
+
         // set user data
         setUserData()
-        // get user details from Firebase
-        val intent = intent
 
-        foodItemName = intent.getStringArrayListExtra("FoodItemName") as ArrayList<String>
-        foodItemPrice = intent.getStringArrayListExtra("FoodItemPrice") as ArrayList<String>
-        foodItemInfo = intent.getStringArrayListExtra("FoodItemInfo") as ArrayList<String>
-        foodItemImage = intent.getStringArrayListExtra("FoodItemImage") as ArrayList<String>
-        foodItemIngredient =
-            intent.getStringArrayListExtra("FoodItemIngredient") as ArrayList<String>
-        foodItemQuantity = intent.getIntegerArrayListExtra("FoodItemQuantity") as ArrayList<Int>
+        // get user details from Intent
+        val intent = intent
+        foodItemName = intent.getStringArrayListExtra("FoodItemName") ?: arrayListOf()
+        foodItemPrice = intent.getStringArrayListExtra("FoodItemPrice") ?: arrayListOf()
+        foodItemInfo = intent.getStringArrayListExtra("FoodItemInfo") ?: arrayListOf()
+        foodItemImage = intent.getStringArrayListExtra("FoodItemImage") ?: arrayListOf()
+        foodItemIngredient = intent.getStringArrayListExtra("FoodItemIngredient") ?: arrayListOf()
+        foodItemQuantity = intent.getIntegerArrayListExtra("FoodItemQuantity") ?: arrayListOf()
 
         totalAmount = calculateTotalAmount().toString() + "₹"
         binding.txtTotalAmount.isEnabled = false
         binding.txtTotalAmount.setText(totalAmount)
+
         binding.btnBackPayout.setOnClickListener {
             finish()
         }
+
         binding.btnPlaceOrder.setOnClickListener {
             // get data from text view
             name = binding.etNamePayOut.text.toString().trim()
             address = binding.etAddressPayOut.text.toString().trim()
             phone = binding.etPhonePayOut.text.toString().trim()
-            if (name.isBlank() && address.isBlank() && phone.isBlank()) {
-                Toast.makeText(this, "Please enter all the details💁‍♂️", Toast.LENGTH_SHORT).show()
+
+            if (name.isBlank() || address.isBlank() || phone.isBlank()) {
+                Toast.makeText(this, "Please enter all the details", Toast.LENGTH_SHORT).show()
             } else {
                 placeOrder()
             }
@@ -75,6 +79,7 @@ class PayOutActivity : AppCompatActivity() {
         val orderDetails = OrderDetails(
             userId,
             name,
+            calculateTotalAmount().toString(),
             foodItemName,
             foodItemPrice,
             foodItemImage,
@@ -88,22 +93,25 @@ class PayOutActivity : AppCompatActivity() {
         )
         val orderReference = databaseReference.child("OrderDetails").child(itemPushKey!!)
         orderReference.setValue(orderDetails).addOnSuccessListener {
-            val bottomSheetDialog = CongratsBottomSheet()
-            bottomSheetDialog.show(supportFragmentManager, "Test")
+            showCongratsBottomSheet()
             removeItemFromCart()
             addOrderToHistory(orderDetails)
         }
             .addOnFailureListener {
-                Toast.makeText(this, "failed to order☹️", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to place order", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun addOrderToHistory(orderDetails: OrderDetails): Void? {
+    private fun addOrderToHistory(orderDetails: OrderDetails) {
         databaseReference.child("user").child(userId).child("BuyHistory")
-            .child(orderDetails.itemPushKey!!).setValue(orderDetails).addOnSuccessListener {
-
+            .child(orderDetails.itemPushKey!!)
+            .setValue(orderDetails)
+            .addOnSuccessListener {
+                // Handle success if needed
             }
-        TODO("Not yet implemented")
+            .addOnFailureListener {
+                // Handle failure if needed
+            }
     }
 
     private fun removeItemFromCart() {
@@ -129,30 +137,31 @@ class PayOutActivity : AppCompatActivity() {
 
     private fun setUserData() {
         val user = auth.currentUser
-        if (user != null) {
-            val userId = user.uid
+        user?.let { currentUser ->
+            val userId = currentUser.uid
             val userReference = databaseReference.child("user").child(userId)
 
             userReference.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-
                     if (snapshot.exists()) {
                         val name = snapshot.child("name").getValue(String::class.java) ?: ""
                         val address = snapshot.child("address").getValue(String::class.java) ?: ""
                         val phone = snapshot.child("phone").getValue(String::class.java) ?: ""
-                        binding.apply {
-                            etNamePayOut.setText(name)
-                            etAddressPayOut.setText(address)
-                            etPhonePayOut.setText(phone)
-                        }
+                        binding.etNamePayOut.setText(name)
+                        binding.etAddressPayOut.setText(address)
+                        binding.etPhonePayOut.setText(phone)
                     }
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    // Handle onCancelled event if needed
                 }
-
             })
         }
+    }
+
+    private fun showCongratsBottomSheet() {
+        val bottomSheetDialog = CongratsBottomSheet()
+        bottomSheetDialog.show(supportFragmentManager, "CongratsBottomSheet")
     }
 }

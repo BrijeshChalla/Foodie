@@ -2,21 +2,22 @@ package com.learnandroid.foodie.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
-class OrderDetails() : Parcelable {
-    var userUid : String ?= null
-    var userName : String ?= null
-    var foodNames : MutableList<String> ?= null
-    var foodImages : MutableList<String> ?= null
-    var foodPrices : MutableList<String> ?= null
-    var foodQuantities : ArrayList<Int> ?= null
-    var address : String ?= null
-    var totalPrice : String ?= null
-    var phoneNumber : String ?= null
-    var orderAccepted : Boolean = false
-    var paymentReceived : Boolean = false
-    var itemPushKey : String ?= null
-    var currentTime : Long = 0
+class OrderDetails() : Serializable {
+    var userUid: String? = null
+    var userName: String? = null
+    var foodNames: MutableList<String>? = null
+    var foodImages: MutableList<String>? = null
+    var foodPrices: MutableList<String>? = null
+    var foodQuantities: ArrayList<Int>? = null
+    var address: String? = null
+    var totalPrice: String? = null
+    var phoneNumber: String? = null
+    var orderAccepted: Boolean = false
+    var paymentReceived: Boolean = false
+    var itemPushKey: String? = null
+    var currentTime: Long = 0
 
     constructor(parcel: Parcel) : this() {
         userUid = parcel.readString()
@@ -30,10 +31,10 @@ class OrderDetails() : Parcelable {
         currentTime = parcel.readLong()
     }
 
-    constructor
-                (
+    constructor(
         userId: String,
         name: String,
+        totalPrice: String,
         foodItemName: ArrayList<String>,
         foodItemPrice: ArrayList<String>,
         foodItemImage: ArrayList<String>,
@@ -44,7 +45,7 @@ class OrderDetails() : Parcelable {
         itemPushKey: String?,
         b: Boolean,
         b1: Boolean
-    ) : this(){
+    ) : this() {
         this.userUid = userId
         this.userName = name
         this.foodNames = foodItemName
@@ -60,7 +61,7 @@ class OrderDetails() : Parcelable {
         this.paymentReceived = paymentReceived
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
+    fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(userUid)
         parcel.writeString(userName)
         parcel.writeString(address)
@@ -72,7 +73,7 @@ class OrderDetails() : Parcelable {
         parcel.writeLong(currentTime)
     }
 
-    override fun describeContents(): Int {
+    fun describeContents(): Int {
         return 0
     }
 

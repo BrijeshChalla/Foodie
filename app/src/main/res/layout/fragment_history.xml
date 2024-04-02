@@ -79,7 +79,7 @@
                     android:layout_height="30dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="40dp"
-                    app:cardBackgroundColor="#53C658"
+                    app:cardBackgroundColor="#C6C6C6"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -90,6 +90,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/add_to_cart_shape"
                     android:text="Received"
+                    android:visibility="invisible"
                     android:textColor="@color/white"
                     android:layout_marginTop="8dp"
                     android:textAllCaps="false"

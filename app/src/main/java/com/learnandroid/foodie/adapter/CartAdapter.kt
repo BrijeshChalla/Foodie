@@ -45,6 +45,7 @@ class CartAdapter(
             itemQuantity.addAll(itemQuantities.toList())
             return itemQuantity
         }
+
         private var itemQuantities: IntArray = intArrayOf()
         private lateinit var cartItemsReference: DatabaseReference
     }

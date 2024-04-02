@@ -1,6 +1,7 @@
 package com.learnandroid.foodie.Fragment
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,16 +30,11 @@ class HistoryFragment : Fragment() {
     private lateinit var userId: String
     private var listOfOrderItem: MutableList<OrderDetails> = mutableListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHistoryBinding.inflate(layoutInflater, container, false)
+        binding = FragmentHistoryBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
 
         // initialize firebase auth
@@ -53,15 +49,24 @@ class HistoryFragment : Fragment() {
         binding.recentBuyItem.setOnClickListener {
             seeItemsRecentBuy()
         }
+        binding.btnReceivedHistory.setOnClickListener {
+            updateOrderStatus()
+        }
 
         return binding.root
+    }
+
+    private fun updateOrderStatus() {
+        val itemPushKey = listOfOrderItem[0].itemPushKey
+        val completeOrderReference = database.reference.child("CompletedOrder").child(itemPushKey!!)
+        completeOrderReference.child("paymentReceived").setValue(true)
     }
 
     // function to see items in recent buy
     private fun seeItemsRecentBuy() {
         listOfOrderItem.firstOrNull()?.let { recentBuy ->
-            val intent = Intent(requireContext(),RecentOrderItem::class.java)
-            intent.putExtra("RecentBuyOrderItem",recentBuy)
+            val intent = Intent(requireContext(), RecentOrderItem::class.java)
+            intent.putExtra("RecentBuyOrderItem", listOfOrderItem as ArrayList<OrderDetails>)
             startActivity(intent)
         }
     }
@@ -91,31 +96,33 @@ class HistoryFragment : Fragment() {
                     setPreviousBuyItemRecyclerView()
                 }
             }
+
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-
-            // function to display the most recent order details
-            private fun setDataInRecentBuyItem() {
-                binding.recentBuyItem.visibility = View.VISIBLE
-                val recentOrderItem = listOfOrderItem.firstOrNull()
-                recentOrderItem?.let {
-                    with(binding) {
-                        txtFoodNameHistory.text = it.foodNames?.firstOrNull() ?: ""
-                        txtPriceHistory.text = it.foodPrices?.firstOrNull() ?: ""
-                        val image = it.foodImages?.firstOrNull() ?: ""
-                        val uri = Uri.parse(image)
-                        Glide.with(requireContext()).load(uri).into(imgFoodHistory)
-
-                        listOfOrderItem.reverse()
-                        if (listOfOrderItem.isNotEmpty()) {
-                        }
-                    }
-                }
+                // Handle onCancelled event if needed
             }
         })
-
     }
+
+    // function to display the most recent order details
+    private fun setDataInRecentBuyItem() {
+        binding.recentBuyItem.visibility = View.VISIBLE
+        val recentOrderItem = listOfOrderItem.firstOrNull()
+        recentOrderItem?.let {
+            with(binding) {
+                txtFoodNameHistory.text = it.foodNames?.firstOrNull() ?: ""
+                txtPriceHistory.text = it.foodPrices?.firstOrNull() ?: ""
+                val image = it.foodImages?.firstOrNull() ?: ""
+                val uri = Uri.parse(image)
+                Glide.with(requireContext()).load(uri).into(imgFoodHistory)
+                val isOrderIsAccepted = listOfOrderItem[0].orderAccepted
+                if (isOrderIsAccepted){
+                    orderStatus.background.setTint(Color.GREEN)
+                    btnReceivedHistory.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
     // function to setup the recyclerview
     private fun setPreviousBuyItemRecyclerView() {
         val buyAgainFoodName = mutableListOf<String>()
@@ -130,11 +137,16 @@ class HistoryFragment : Fragment() {
                         buyAgainFoodImage.add(it)
                     }
                 }
-                val rv = binding.buyAgainRecyclerView
-                rv.layoutManager = LinearLayoutManager(requireContext())
-                buyAgainAdapter = BuyAgainAdapter(buyAgainFoodName,buyAgainFoodPrice,buyAgainFoodImage,requireContext())
-                rv.adapter = buyAgainAdapter
             }
         }
+        val rv = binding.buyAgainRecyclerView
+        rv.layoutManager = LinearLayoutManager(requireContext())
+        buyAgainAdapter = BuyAgainAdapter(
+            buyAgainFoodName,
+            buyAgainFoodPrice,
+            buyAgainFoodImage,
+            requireContext()
+        )
+        rv.adapter = buyAgainAdapter
     }
 }
